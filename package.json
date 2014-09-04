@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-ember-validations",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "ember-validations for ember addon",
   "main": "index.js",
   "scripts": {
@@ -17,9 +17,9 @@
     "email": "hysios@gmail.com"
   },
   "license": "MIT",
-  "_id": "ember-cli-ember-validations@0.0.15",
-  "_shasum": "67920c8c54f45d70ad03c062e225a7983e0821c1",
-  "_from": "ember-cli-ember-validations@0.0.15",
+  "_id": "ember-cli-ember-validations@0.0.16",
+  "_shasum": "9c9089b2f75c286f743a616ad3c4cf3aeca33856",
+  "_from": "ember-cli-ember-validations@0.0.16",
   "_npmVersion": "1.4.16",
   "_npmUser": {
     "name": "hysios",
@@ -32,9 +32,9 @@
     }
   ],
   "dist": {
-    "shasum": "67920c8c54f45d70ad03c062e225a7983e0821c1",
-    "tarball": "http://registry.npmjs.org/ember-cli-ember-validations/-/ember-cli-ember-validations-0.0.15.tgz"
+    "shasum": "9c9089b2f75c286f743a616ad3c4cf3aeca33856",
+    "tarball": "http://registry.npmjs.org/ember-cli-ember-validations/-/ember-cli-ember-validations-0.0.16.tgz"
   },
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/ember-cli-ember-validations/-/ember-cli-ember-validations-0.0.15.tgz"
+  "_resolved": "https://registry.npmjs.org/ember-cli-ember-validations/-/ember-cli-ember-validations-0.0.16.tgz"
 }

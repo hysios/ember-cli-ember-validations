@@ -1,46 +1,32 @@
+import Ember from 'ember';
 import ValidateMessageComponent from './validate-message';
 
-/**
- * getBindingForm
- * 
- * According to Binding object, obtain a property of object of itself object;
- * 
- * @param  {Object} context 	Any object from
- * @param  {Ember.Binding} Binding 		A Binding object
- * @return {Object} 			This object context
- */
+var IS_GLOBAL = /^([A-Z$]|([0-9][A-Z$]))/,
+    get = Ember.get;
+
+function isGlobalPath(path) {
+  return IS_GLOBAL.test(path);
+}
+
+function getWithGlobals(obj, path) {
+  return get(isGlobalPath(path) ? Ember.lookup : obj, path);
+}
+
 function getBindingFrom(context, Binding){
-  var from, source; 
-
-  if (!Ember.Binding.prototype.isPrototypeOf(Binding)) return null;
-
-  from = Binding._from || '';	  
-  source = from.slice(0, from.lastIndexOf('.'));
+  var from = Binding._from,
+      source = from.slice(0, from.lastIndexOf('.'));
 
   if (Ember.isBlank(source) ||
       !Ember.Component.prototype.isPrototypeOf(context)) {
     return null;
   }
 
-  return context.get(source);
+  return getWithGlobals(context, source);
 };
 
-/**
- * getBindingTo
- *
- * According to Binding object, obtain a property of object of property's name;
- * 
- * @param  {Object} context 	Any object from
- * @param  {Ember.Binding} Binding 		A Binding object
- * @return {String}         	A string property's name of object
- */
 function getBindingTo(context, Binding){
-  var from, target;
-
-  if (!Ember.Binding.prototype.isPrototypeOf(Binding)) return null;
-
-  from = Binding._from || '';
-  target = from.slice(from.lastIndexOf('.') + 1);
+  var from = Binding._from,
+      target = from.slice(from.lastIndexOf('.') + 1);
 
   if (Ember.isBlank(target) ||
       !Ember.Component.prototype.isPrototypeOf(context)) {
@@ -50,13 +36,7 @@ function getBindingTo(context, Binding){
   return target
 };
 
-/**
- * validateProperty
- *
- * @param  {DS.Model} model  	Used validating object instance of DS.Model or Ember.ObjectController
- * @param  {String} property 	A string name of model's property
- * @return {RSVP.Primise}       return all validator's promise object;
- */
+
 function validateProperty(model, property) {
   var validators;
 
@@ -71,24 +51,15 @@ function validateProperty(model, property) {
   }));
 };
 
-/**
- * isValidateMessageComponent
- * 
- * @param  {[any]}  object 	any object
- * @return {Boolean}        true show `object` is kind of ValidateMessageComponent object， or else
- */
+
 function isValidateMessageComponent(object) {
   return ValidateMessageComponent.prototype.isPrototypeOf(object);
 };
 
 export default Ember.Component.extend({
+
   model: null,
 
-  /**
-   * propertyChanging
-   * 
-   * Validate property's rule when property changing
-   */
   propertyChanging: function(){
     var propertyBinding = this.get('propertyBinding'),
         model = this.get('model'),
@@ -114,14 +85,6 @@ export default Ember.Component.extend({
     });
   }.observes('property'),
 
-  /**
-   * notifyErrorMessage
-   *
-   * Send message to `validate-message` component
-   * 
-   * @param  {String} action 		A name of Action
-   * @optional  {[type]} errors 	Optional arguments with action call
-   */
   notifyErrorMessage: function(action, errors){
     var yieldViews = this._childViews[0],
         errorMessageView;

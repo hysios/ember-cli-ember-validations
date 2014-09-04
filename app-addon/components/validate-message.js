@@ -1,8 +1,4 @@
-import ValidateWithComponent from './validate-with';
-
-function isValidateWithComponent(object) {
-  return ValidateWithComponent.prototype.isPrototypeOf(object);
-}
+import Ember from 'ember';
 
 export default Ember.Component.extend({
   fullMessage: null,
