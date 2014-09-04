@@ -10,8 +10,12 @@ import ValidateMessageComponent from './validate-message';
  * @return {Object} 			This object context
  */
 function getBindingFrom(context, Binding){
-  var from = Binding._from,
-      source = from.slice(0, from.lastIndexOf('.'));
+  var from, source; 
+
+  if (!Ember.Binding.prototype.isPrototypeOf(Binding)) return null;
+
+  from = Binding._from || '';	  
+  source = from.slice(0, from.lastIndexOf('.'));
 
   if (Ember.isBlank(source) ||
       !Ember.Component.prototype.isPrototypeOf(context)) {
@@ -31,8 +35,12 @@ function getBindingFrom(context, Binding){
  * @return {String}         	A string property's name of object
  */
 function getBindingTo(context, Binding){
-  var from = Binding._from,
-      target = from.slice(from.lastIndexOf('.') + 1);
+  var from, target;
+
+  if (!Ember.Binding.prototype.isPrototypeOf(Binding)) return null;
+
+  from = Binding._from || '';
+  target = from.slice(from.lastIndexOf('.') + 1);
 
   if (Ember.isBlank(target) ||
       !Ember.Component.prototype.isPrototypeOf(context)) {
