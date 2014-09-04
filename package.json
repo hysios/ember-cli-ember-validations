@@ -1,0 +1,40 @@
+{
+  "name": "ember-cli-ember-validations",
+  "version": "0.0.16",
+  "description": "ember-validations for ember addon",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "ember-addon": {
+    "main": "lib/ember-cli-ember-validations.js"
+  },
+  "keywords": [
+    "ember-addon"
+  ],
+  "author": {
+    "name": "hysios hu",
+    "email": "hysios@gmail.com"
+  },
+  "license": "MIT",
+  "_id": "ember-cli-ember-validations@0.0.15",
+  "_shasum": "67920c8c54f45d70ad03c062e225a7983e0821c1",
+  "_from": "ember-cli-ember-validations@0.0.15",
+  "_npmVersion": "1.4.16",
+  "_npmUser": {
+    "name": "hysios",
+    "email": "hysios@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "hysios",
+      "email": "hysios@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "67920c8c54f45d70ad03c062e225a7983e0821c1",
+    "tarball": "http://registry.npmjs.org/ember-cli-ember-validations/-/ember-cli-ember-validations-0.0.15.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/ember-cli-ember-validations/-/ember-cli-ember-validations-0.0.15.tgz"
+}
