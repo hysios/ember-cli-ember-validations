@@ -38,6 +38,19 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
 });
 ```
 
+you controller 
+
+```js
+// app/controller/index.js
+import Ember from 'ember';
+
+export default Ember.Controller.extend({
+  user: function(){
+    return this.store.createRecord('user', {login: 'hi'});
+  }.property()
+});
+```
+
 in your template 
 
 ```handlebars
@@ -50,3 +63,7 @@ in your template
 {{/validate-with}}
 
 ```
+
+
+
+
