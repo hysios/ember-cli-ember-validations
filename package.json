@@ -1,40 +1,40 @@
 {
   "name": "ember-cli-ember-validations",
-  "version": "0.0.17",
-  "description": "ember-validations for ember addon",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "version": "0.0.0",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
   },
-  "ember-addon": {
-    "main": "lib/ember-cli-ember-validations.js"
+  "scripts": {
+    "start": "ember server",
+    "build": "ember build",
+    "test": "ember test"
+  },
+  "repository": "https://github.com/stefanpenner/ember-cli",
+  "engines": {
+    "node": ">= 0.10.0"
   },
   "keywords": [
     "ember-addon"
   ],
+  "ember-addon": {
+    "main": "lib/ember-cli-ember-validations.js",
+    "configPath": "tests/dummy/config"
+  },
   "author": {
     "name": "hysios hu",
     "email": "hysios@gmail.com"
   },
   "license": "MIT",
-  "_id": "ember-cli-ember-validations@0.0.16",
-  "_shasum": "9c9089b2f75c286f743a616ad3c4cf3aeca33856",
-  "_from": "ember-cli-ember-validations@0.0.16",
-  "_npmVersion": "1.4.16",
-  "_npmUser": {
-    "name": "hysios",
-    "email": "hysios@gmail.com"
-  },
-  "maintainers": [
-    {
-      "name": "hysios",
-      "email": "hysios@gmail.com"
-    }
-  ],
-  "dist": {
-    "shasum": "9c9089b2f75c286f743a616ad3c4cf3aeca33856",
-    "tarball": "http://registry.npmjs.org/ember-cli-ember-validations/-/ember-cli-ember-validations-0.0.16.tgz"
-  },
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/ember-cli-ember-validations/-/ember-cli-ember-validations-0.0.16.tgz"
+  "devDependencies": {
+    "body-parser": "^1.2.0",
+    "broccoli-asset-rev": "0.0.17",
+    "broccoli-ember-hbs-template-compiler": "^1.6.1",
+    "ember-cli": "0.0.41",
+    "ember-cli-ember-data": "0.1.0",
+    "ember-cli-ic-ajax": "0.1.1",
+    "ember-cli-qunit": "0.0.5",
+    "express": "^4.8.5",
+    "glob": "^4.0.5"
+  }
 }
