@@ -1,17 +1,27 @@
 import Ember from 'ember';
+import ValidateWithComponent from './validate-with';
 
 export default Ember.Component.extend({
   fullMessage: null,
+  validateWith: null,
 
-  actions: {
-    displayError: function(errors){
-      this.set('hasError', true);
-      this.set('fullMessage', errors.join(','));
-    },
+  didInsertElement: function() {
+    var view = this.get('parentView');
 
-    hiddenError: function(){
-      this.set('hasError', false);
-      this.set('fullMessage', null);
+    //find until parentView is undefined
+    while (view) {
+      if(ValidateWithComponent.prototype.isPrototypeOf(view)) {
+        this.set('validateWith', view);
+        view.addObserver('errors', this, this.setMessage.bind(this));
+        return;
+      }
+      view = view.get('parentView');
     }
+  },
+
+  setMessage: function() {
+    var errors = this.get('validateWith.errors'),
+        message = errors.join(',');
+    this.set('fullMessage', message);
   }
 });

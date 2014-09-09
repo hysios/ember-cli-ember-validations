@@ -1,3 +1,4 @@
+<h2>block syntax</h2>
 {{#validate-with propertyBinding="user.login"}}
   <label>
     {{validate-message}}
@@ -5,3 +6,6 @@
   {{input value=user.login}}
 {{/validate-with}}
 
+<hr/>
+<h2>inline syntax</h2>
+{{input-validate propertyBinding="user.login"}}

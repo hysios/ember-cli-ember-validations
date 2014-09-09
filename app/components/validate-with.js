@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ValidateMessageComponent from './validate-message';
+//import ValidateMessageComponent from './validate-message';
 
 var IS_GLOBAL = /^([A-Z$]|([0-9][A-Z$]))/,
     get = Ember.get;
@@ -53,14 +53,15 @@ function validateProperty(model, property) {
 
 
 function isValidateMessageComponent(object) {
-  return ValidateMessageComponent.prototype.isPrototypeOf(object);
+  //return ValidateMessageComponent.prototype.isPrototypeOf(object);
 };
 
 export default Ember.Component.extend({
-
   model: null,
+  errors: null,
+  property: null,
 
-  propertyChanging: function(){
+  validate: function(){
     var propertyBinding = this.get('propertyBinding'),
         model = this.get('model'),
         _this = this,
@@ -74,27 +75,11 @@ export default Ember.Component.extend({
 
     if (!(model && property)) return;
 
+    model.set(property, this.get('property'));
     validateProperty(model, property).then(function(array){
-      _this.set('isValid', true);
       _this.set('errors', Ember.A());
-      _this.notifyErrorMessage('hiddenError');
     }, function(errors){
-      _this.set('isValid', false);
       _this.set('errors', errors[property]);
-      _this.notifyErrorMessage('displayError', errors[property]);
     });
-  }.observes('property'),
-
-  notifyErrorMessage: function(action, errors){
-    var yieldViews = this._childViews[0],
-        errorMessageView;
-
-    errorMessageView = yieldViews._childViews.find(function(view){
-      return isValidateMessageComponent(view);
-    });
-
-    if (!Ember.isBlank(errorMessageView)) {
-      errorMessageView.send(action, errors);
-    }
-  }
+  }.observes('property')
 });
