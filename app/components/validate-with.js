@@ -59,6 +59,7 @@ function isValidateMessageComponent(object) {
 export default Ember.Component.extend({
 
   model: null,
+  layoutName: 'components/t-test',
 
   propertyChanging: function(){
     var propertyBinding = this.get('propertyBinding'),
@@ -74,11 +75,15 @@ export default Ember.Component.extend({
 
     if (!(model && property)) return;
 
+    console.log(this.get('controller'));
+
     validateProperty(model, property).then(function(array){
+      _this.set('origContext.isValid', true);
       _this.set('isValid', true);
       _this.set('errors', Ember.A());
       _this.notifyErrorMessage('hiddenError');
     }, function(errors){
+      _this.set('origContext.isValid', false);
       _this.set('isValid', false);
       _this.set('errors', errors[property]);
       _this.notifyErrorMessage('displayError', errors[property]);
