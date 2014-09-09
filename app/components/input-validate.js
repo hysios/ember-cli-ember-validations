@@ -1,13 +1,10 @@
 import Ember from 'ember';
 import ValidateWithComponent from './validate-with';
 
+/**
+ * "input-validate" extends ValidateWithComponent and provided a inline syntax
+ * for simple case use.
+ */
 export default ValidateWithComponent.extend({
-  fullMessage: function() {
-    var errors = this.get('errors');
-    if(errors) {
-      return errors.join(',');
-    } else {
-      return '';
-    }
-  }.property('errors')
+  //keep it here! it extends ValidateWithComponent 
 });

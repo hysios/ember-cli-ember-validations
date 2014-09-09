@@ -5,21 +5,27 @@ export default Ember.Component.extend({
   fullMessage: null,
   validateWith: null,
 
+  /**
+   * find parent compnent view 'validate-with', then manually add
+   * a observer method on 'errors' property.
+   */
   didInsertElement: function() {
     var view = this.get('parentView');
 
-    //find until parentView is undefined
     while (view) {
       if(ValidateWithComponent.prototype.isPrototypeOf(view)) {
         this.set('validateWith', view);
-        view.addObserver('errors', this, this.setMessage.bind(this));
+        view.addObserver('errors', this, this.errorsChanged);
         return;
       }
       view = view.get('parentView');
     }
   },
 
-  setMessage: function() {
+  /**
+   * observer method which triggered when errors changed in the parentView.
+   */
+  errorsChanged: function() {
     var errors = this.get('validateWith.errors'),
         message = errors.join(',');
     this.set('fullMessage', message);
