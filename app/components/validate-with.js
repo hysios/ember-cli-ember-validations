@@ -59,7 +59,7 @@ function isValidateMessageComponent(object) {
 export default Ember.Component.extend({
 
   model: null,
-  layoutName: 'components/t-test',
+  layoutName: 'components/test',
 
   propertyChanging: function(){
     var propertyBinding = this.get('propertyBinding'),

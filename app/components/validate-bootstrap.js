@@ -3,7 +3,8 @@ import ValidateWithComponent from './validate-with';
 
 export default ValidateWithComponent.extend({
   horizontal: false,
-  layoutName: 'components/t-test',
+
+  layoutName: 'components/validate-bootstrap-horizontal',
 
   init: function() {
     this._super();
