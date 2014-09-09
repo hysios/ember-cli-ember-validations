@@ -1,5 +1,4 @@
 import Ember from 'ember';
-//import ValidateMessageComponent from './validate-message';
 
 var IS_GLOBAL = /^([A-Z$]|([0-9][A-Z$]))/,
     get = Ember.get;
@@ -33,9 +32,8 @@ function getBindingTo(context, Binding){
     return null;
   }
 
-  return target
+  return target;
 };
-
 
 function validateProperty(model, property) {
   var validators;
@@ -51,17 +49,12 @@ function validateProperty(model, property) {
   }));
 };
 
-
-function isValidateMessageComponent(object) {
-  //return ValidateMessageComponent.prototype.isPrototypeOf(object);
-};
-
 export default Ember.Component.extend({
   model: null,
   errors: null,
   property: null,
 
-  validate: function(){
+  propertyChanged: function(){
     var propertyBinding = this.get('propertyBinding'),
         model = this.get('model'),
         _this = this,
@@ -76,6 +69,7 @@ export default Ember.Component.extend({
     if (!(model && property)) return;
 
     model.set(property, this.get('property'));
+    
     validateProperty(model, property).then(function(array){
       _this.set('errors', Ember.A());
     }, function(errors){
