@@ -1,11 +1,30 @@
-<h2>block syntax</h2>
-{{#validate-with propertyBinding="user.login"}}
-  <label>
+<form class="form">
+  {{#validate-with propertyBinding="user.login"}}
+  <label class="control-label" for="login">
     {{validate-message}}
   </label>
-  {{input valueBinding="user.login"}}
-{{/validate-with}}
+  {{input value=user.login class="form-control" id="login"}}
+  {{/validate-with}}
+</form>
+
+<form class="form-horizontal">
+  {{#validate-bootstrap propertyBinding="user.login" horizontal=true}}
+  <label class="control-label" for="login2">
+    {{validate-message}}
+  </label>
+  {{input value=user.login class="form-control" id="login2"}}
+  {{/validate-bootstrap}}
+</form>
+<form class="form-horizontal">
+  {{#validate-bootstrap propertyBinding="user.login"}}
+  <label class="control-label" for="login2">
+    {{validate-message}}
+  </label>
+  {{input value=user.login class="form-control" id="login2"}}
+  {{/validate-bootstrap}}
+</form>
 
 <hr/>
 <h2>inline syntax</h2>
 {{input-validate propertyBinding="user.login"}}
+
