@@ -1,4 +1,8 @@
-{{yield}}
-{{#if canValidate}}
-<span {{bind-attr class=":glyphicon :form-control-feedback isValid:glyphicon-ok:glyphicon-remove"}} ></span>
-{{/if}}
+<label {{bind-attr class=":control-label labelCol" for=inputId}} >{{label}}</label>
+<div {{bind-attr class="inputCol"}}>
+  {{yield}}
+  {{validate-icon}}
+  <div {{bind-attr class="isValid:has-success:has-error"}}>
+    <span class="help-block">{{validate-message}}</span>
+  </div>
+</div>

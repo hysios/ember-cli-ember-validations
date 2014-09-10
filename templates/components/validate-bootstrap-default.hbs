@@ -1,1 +1,4 @@
-default layout!
+<label {{bind-attr class=":control-label" for=inputId}}>{{label}}{{validate-message tagName='span'}}</label>
+{{yield}}
+{{validate-icon}}
+

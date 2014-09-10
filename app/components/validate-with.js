@@ -104,7 +104,7 @@ export default Ember.Component.extend({
       return true;
     }
 
-    return this.get('validCount');
+    return this.get('validCount') > 0;
 
   }.property('firstValid', 'validCount')
 });
