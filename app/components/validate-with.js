@@ -53,14 +53,14 @@ function validateProperty(model, property) {
  * validate-with provide a block syntax that help you do input validate
  * and show error messages automatically. it use the power of "ember-validation",
  * you should config the validate logic in your model then use like below:
- * 
+ *
  *   {{#validate-with propertyBinding="user.login"}}
  *     <label>
  *       {{validate-message}}
  *     </label>
  *     {{input valueBinding="user.login"}}
  *   {{/validate-with}}
- *   
+ *
  */
 export default Ember.Component.extend({
   model: null,
@@ -82,7 +82,7 @@ export default Ember.Component.extend({
     if (!(model && property)) return;
 
     model.set(property, this.get('property'));
-    
+
     validateProperty(model, property).then(function(array){
       _this.set('errors', Ember.A());
     }, function(errors){

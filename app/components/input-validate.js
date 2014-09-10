@@ -6,5 +6,5 @@ import ValidateWithComponent from './validate-with';
  * for simple case use.
  */
 export default ValidateWithComponent.extend({
-  //keep it here! it extends ValidateWithComponent 
+  //keep it here! it extends ValidateWithComponent
 });
