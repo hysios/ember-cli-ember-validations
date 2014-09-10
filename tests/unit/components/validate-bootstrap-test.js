@@ -1,4 +1,5 @@
 import { test, moduleForComponent } from 'ember-qunit';
+import Ember from 'ember';
 
 moduleForComponent('validate-bootstrap', 'ValidateBootstrapComponent', {
   // specify the other units that are required for this test
@@ -9,7 +10,10 @@ test('it renders', function() {
   expect(2);
 
   // creates the component instance
-  var component = this.subject();
+  var component = this.subject({
+    layout: Ember.Handlebars.compile('{{yield}}')
+  });
+
   equal(component.state, 'preRender');
 
   // appends the component to the page
