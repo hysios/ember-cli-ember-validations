@@ -96,15 +96,13 @@ test('numericality rule', function() {
     MyTest.sampleModel.set('age', 'abc');
   });
 
-
   var yieldViews = component._childViews[0],
       errorMessageView = yieldViews._childViews[1];
 
   equal(errorMessageView.get('fullMessage'), "is not a number");
 
-
   Ember.run(function() {
-    MyTest.sampleModel.set('age', '123');
+    MyTest.sampleModel.set('age', '-123.00');
   });
 
   // yieldViews = component._childViews[0],
