@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import ValidateMessageComponent from './validate-message';
 
 var IS_GLOBAL = /^([A-Z$]|([0-9][A-Z$]))/,
     get = Ember.get;
@@ -33,9 +32,8 @@ function getBindingTo(context, Binding){
     return null;
   }
 
-  return target
+  return target;
 };
-
 
 function validateProperty(model, property) {
   var validators;
@@ -51,17 +49,25 @@ function validateProperty(model, property) {
   }));
 };
 
-
-function isValidateMessageComponent(object) {
-  return ValidateMessageComponent.prototype.isPrototypeOf(object);
-};
-
+/**
+ * validate-with provide a block syntax that help you do input validate
+ * and show error messages automatically. it use the power of "ember-validation",
+ * you should config the validate logic in your model then use like below:
+ *
+ *   {{#validate-with propertyBinding="user.login"}}
+ *     <label>
+ *       {{validate-message}}
+ *     </label>
+ *     {{input valueBinding="user.login"}}
+ *   {{/validate-with}}
+ *
+ */
 export default Ember.Component.extend({
-
   model: null,
-  layoutName: 'components/test',
+  errors: null,
+  property: null,
 
-  propertyChanging: function(){
+  propertyChanged: function(){
     var propertyBinding = this.get('propertyBinding'),
         model = this.get('model'),
         _this = this,
@@ -75,31 +81,12 @@ export default Ember.Component.extend({
 
     if (!(model && property)) return;
 
-    console.log(this.get('controller'));
+    model.set(property, this.get('property'));
 
     validateProperty(model, property).then(function(array){
-      _this.set('origContext.isValid', true);
-      _this.set('isValid', true);
       _this.set('errors', Ember.A());
-      _this.notifyErrorMessage('hiddenError');
     }, function(errors){
-      _this.set('origContext.isValid', false);
-      _this.set('isValid', false);
       _this.set('errors', errors[property]);
-      _this.notifyErrorMessage('displayError', errors[property]);
     });
-  }.observes('property'),
-
-  notifyErrorMessage: function(action, errors){
-    var yieldViews = this._childViews[0],
-        errorMessageView;
-
-    errorMessageView = yieldViews._childViews.find(function(view){
-      return isValidateMessageComponent(view);
-    });
-
-    if (!Ember.isBlank(errorMessageView)) {
-      errorMessageView.send(action, errors);
-    }
-  }
+  }.observes('property')
 });
