@@ -8,7 +8,8 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
   validations: {
     login: {
       presence: true,
-      length: { minimum: 5 }
+      length: { minimum: 5 },
+      numericality: true
     },
     age: {
 
