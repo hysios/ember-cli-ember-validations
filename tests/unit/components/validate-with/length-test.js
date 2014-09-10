@@ -1,15 +1,29 @@
 import { test, moduleForComponent } from 'ember-qunit';
 import Ember from 'ember';
-import Model from './model';
+//import Model from './model';
 
 moduleForComponent('validate-with', 'ValidateWithComponent', {
   // specify the other units that are required for this test
   needs: [ 'component:validate-message' ]
 });
 
+var Model = Ember.Object.extend(Ember.Validations.Mixin, {
+  myLength: null,
+  myUrl: null,
+
+  validations: {
+    myLength: {
+      length: { minimum: 5 }
+    },
+    myUrl: {
+      url: { allowUserPass: true }
+    }
+  }
+});
+
 var MyTest = Ember.lookup.MyTest = Ember.lookup.MyTest || Ember.Namespace.create();
 MyTest.lengthModel = Model.create({
-  myLength: '12'
+  myLength: 'ab'
 });
 
 test('it validate length', function() {
