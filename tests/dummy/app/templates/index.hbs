@@ -6,6 +6,7 @@
     <label class="control-label" for="login">
       {{validate-message}}
     </label>
+
     {{input value=user.login class="form-control" id="login"}}
     {{/validate-with}}
   </form>
@@ -31,3 +32,4 @@
   <h3>Inline syntax</h3>
   {{input-validate propertyBinding="user.login"}}
 </div>
+
