@@ -1,8 +1,3 @@
-{{#if isValid}}
-Ok
-{{else}}
-Not
-{{/if}}
 <form class="form">
   {{#validate-with propertyBinding="user.login"}}
   <label class="control-label" for="login">
@@ -14,6 +9,14 @@ Not
 
 <form class="form-horizontal">
   {{#validate-bootstrap propertyBinding="user.login" horizontal=true}}
+  <label class="control-label" for="login2">
+    {{validate-message}}
+  </label>
+  {{input value=user.login class="form-control" id="login2"}}
+  {{/validate-bootstrap}}
+</form>
+<form class="form-horizontal">
+  {{#validate-bootstrap propertyBinding="user.login"}}
   <label class="control-label" for="login2">
     {{validate-message}}
   </label>
