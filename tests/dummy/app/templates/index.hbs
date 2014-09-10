@@ -1,38 +1,33 @@
-<form class="form">
-  {{#validate-with propertyBinding="user.login"}}
-  <label class="control-label" for="login">
-    {{validate-message}}
-  </label>
-  {{input value=user.login class="form-control" id="login"}}
-  {{/validate-with}}
-</form>
-
-<hr />
-
-<form class="form-horizontal">
-  {{#validate-bootstrap propertyBinding="user.login" horizontal=true}}
-    <label class="control-label col-sm-2" for="login2">
-      Login
+<div class="container">
+  <hr/>
+  <h3>original one witout bootstrap</h3>
+  <form class="form">
+    {{#validate-with propertyBinding="user.login"}}
+    <label class="control-label" for="login">
+      {{validate-message}}
     </label>
-    <div class="col-sm-10">
-      {{input value=user.login class="form-control" id="login2"}}
-      <div class="has-error">
-        <span class="help-block">{{validate-message}}</span>
-      </div>
-    </div>
-  {{/validate-bootstrap}}
-</form>
-
-<form class="form-horizontal">
-  {{#validate-bootstrap propertyBinding="user.login"}}
-  <label class="control-label" for="login2">
-    {{validate-message}}
-  </label>
-  {{input value=user.login class="form-control" id="login2"}}
-  {{/validate-bootstrap}}
-</form>
-
-<hr/>
-<h2>inline syntax</h2>
-{{input-validate propertyBinding="user.login"}}
-
+    {{input value=user.login class="form-control" id="login"}}
+    {{/validate-with}}
+  </form>
+  <hr/>
+  <h3>Horizontal one with bootstrap</h3>
+  <form class="form-horizontal" role="form">
+    {{#validate-bootstrap propertyBinding="user.login" horizontal=true}}
+    <label class="control-label col-sm-3" for="login2">
+      {{validate-message}}
+    </label>
+    {{/validate-bootstrap}}
+  </form>
+  <hr/>
+  <h3>Vertical one with bootstrap</h3>
+  <form class="form" role="form">
+    {{#validate-bootstrap propertyBinding="user.login"}}
+    <label class="control-label" for="login3">
+      {{validate-message}}
+    </label>
+    {{/validate-bootstrap}}
+  </form>
+  <hr/>
+  <h3>Inline syntax</h3>
+  {{input-validate propertyBinding="user.login"}}
+</div>
