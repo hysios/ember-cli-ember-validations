@@ -1,6 +1,4 @@
 <label {{bind-attr class=":control-label" for=inputId}}>{{label}}{{validate-message tagName='span'}}</label>
 {{yield}}
-{{#if canValidate}}
-<span {{bind-attr class=":glyphicon :form-control-feedback isValid:glyphicon-ok:glyphicon-remove"}} ></span>
-{{/if}}
+{{validate-icon}}
 
