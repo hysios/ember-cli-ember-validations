@@ -1,1 +1,6 @@
-default layout!
+{{yield}}
+{{input value=property class="form-control" id="login3"}}
+{{#if canValidate}}
+<span {{bind-attr class=":glyphicon :form-control-feedback isValid:glyphicon-ok:glyphicon-remove"}} ></span>
+{{/if}}
+

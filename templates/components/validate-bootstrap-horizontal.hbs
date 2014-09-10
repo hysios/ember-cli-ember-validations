@@ -1,5 +1,7 @@
 {{yield}}
-{{log "validate-bootstrap-horizontal" isValid}}
-{{#if canValidate}}
-<span {{bind-attr class=":glyphicon :form-control-feedback isValid:glyphicon-ok:glyphicon-remove"}} ></span>
-{{/if}}
+<div class="col-sm-9">
+  {{input value=property class="form-control col-sm-9" id="login2"}}
+  {{#if canValidate}}
+  <span {{bind-attr class=":glyphicon :form-control-feedback isValid:glyphicon-ok:glyphicon-remove"}} ></span>
+  {{/if}}
+</div>
