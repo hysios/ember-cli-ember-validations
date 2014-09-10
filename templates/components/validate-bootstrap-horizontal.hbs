@@ -1,8 +1,8 @@
-{{yield}}
-<div class="col-sm-9">
-  {{input value=property class="form-control col-sm-9" id="login2"}}
-  {{#if canValidate}}
-  <span {{bind-attr class=":glyphicon :form-control-feedback isValid:glyphicon-ok:glyphicon-remove"}} ></span>
-  {{/if}}
+<label {{bind-attr class=":control-label labelCol" for=inputId}} >{{label}}</label>
+<div {{bind-attr class="inputCol"}}>
+  {{yield}}
+  {{validate-icon}}
+  <div {{bind-attr class="isValid:has-success:has-error"}}>
+    <span class="help-block">{{validate-message}}</span>
+  </div>
 </div>
-

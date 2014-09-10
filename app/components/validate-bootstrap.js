@@ -5,6 +5,8 @@ export default ValidateWithComponent.extend({
   classNames: ['form-group', 'has-feedback'],
   classNameBindings: ['validateStatus'],
   horizontal: false,
+  defaultLabelCol: 2,
+  defaultInputCol: 10,
 
   layoutName: function() {
     if(this.get('horizontal')) {
@@ -21,5 +23,26 @@ export default ValidateWithComponent.extend({
       return "";
 
     return isValid ? "has-success" : "has-error";
-  }.property('isValid', 'firstValid')
+  }.property('isValid', 'firstValid'),
+
+  labelCol: function(key, values){
+    return this._concatColumnClass(arguments.length > 1 ? values : this.get('defaultLabelCol'));
+  }.property(),
+
+  inputCol: function(key, values){
+    return this._concatColumnClass(arguments.length > 1 ? values : this.get('defaultInputCol'));
+  }.property(),
+
+  /**
+   * [_concatColumnClass description]
+   *
+   * @private
+   * @param  {[type]} col [description]
+   * @return {[type]}     [description]
+   */
+  _concatColumnClass: function(col){
+    var mode = this.getWithDefault('columnMode', 'md'),
+        str = ['col', mode, col];
+    return str.join('-');
+  }
 });
