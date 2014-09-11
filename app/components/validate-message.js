@@ -4,6 +4,11 @@ import ValidateWithComponent from './validate-with';
 export default Ember.Component.extend({
   fullMessage: null,
   validateWith: null,
+  isValide: null,
+  classNameBindings: ['priority'],
+  priority: function() {
+    return 'has-error';
+  }.property('status'),
 
   /**
    * find parent compnent view 'validate-with', then manually add

@@ -2,7 +2,5 @@
 <div {{bind-attr class="inputCol"}}>
   {{yield}}
   {{validate-icon}}
-  <div {{bind-attr class="isValid:has-success:has-error"}}>
-    <span class="help-block">{{validate-message}}</span>
-  </div>
+  {{validate-message}}
 </div>
