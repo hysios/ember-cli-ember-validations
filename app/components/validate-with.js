@@ -69,6 +69,7 @@ export default Ember.Component.extend({
   isValid: null,
   firstValid: false,
   validCount: 0,
+  disableIcon: false,
 
   propertyChanged: function() {
     var propertyBinding = this.get('propertyBinding'),

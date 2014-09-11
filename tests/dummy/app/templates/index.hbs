@@ -31,18 +31,24 @@
 
   <h3>validate select</h3>
   <form class="form" role="form">
-    {{#validate-bootstrap label='成绩等级' propertyBinding="user.level" horizontal=true labelCol=5
-    inputCol=5}}
+    {{#validate-bootstrap label='成绩等级' propertyBinding="user.level" disableIcon=true}}
       {{view Ember.Select content=options  prompt="Please select a name" class="form-control"
       value=user.level}}
     {{/validate-bootstrap}}
   </form>
   <hr/>
 
-  <h3>validate checkbox</h3>
+  <h3>validate vertical checkbox</h3>
   <form class="form" role="form">
-    {{#validate-bootstrap  propertyBinding="user.agreement" horizontal=true labelCol=5
-    inputCol=5}}
+    {{#validate-bootstrap label="agreement" propertyBinding="user.agreement" inputType="checkbox"}}
+      {{input type='checkbox' checked=user.agreement}}是否已阅读并同意遵守本协议
+    {{/validate-bootstrap}}
+  </form>
+  <hr/>
+
+  <h3>validate horizontal checkbox</h3>
+  <form class="form-horizontal" role="form">
+    {{#validate-bootstrap  propertyBinding="user.agreement" inputType="checkbox" horizontal=true}}
       {{input type='checkbox' checked=user.agreement}}是否已阅读并同意遵守本协议
     {{/validate-bootstrap}}
   </form>

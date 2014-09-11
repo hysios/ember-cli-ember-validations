@@ -4,9 +4,9 @@ import ValidateWithRetrieveMixin from '../mixins/validate-with-retrieve';
 export default Ember.Component.extend(ValidateWithRetrieveMixin, {
   isValid: Ember.computed.alias('validateWith.isValid'),
   canValidate: Ember.computed.alias('validateWith.canValidate'),
+  disableIcon: Ember.computed.alias('validateWith.disableIcon'),
   classNames: ['glyphicon', 'form-control-feedback'],
   classNameBindings: ['iconClass'],
-  showIcon: true,
 
   /**
    * @property {string} isValid add different class according to
@@ -20,6 +20,6 @@ export default Ember.Component.extend(ValidateWithRetrieveMixin, {
    * @property {boolean} canValidate determine whether to show the icon
    */
   isVisible: function(){
-    return this.get('showIcon') ? this.get('canValidate') : false;
-  }.property('canValidate')
+    return !this.get('disableIcon') && this.get('canValidate');
+  }.property('canValidate', 'disableIcon')
 });
