@@ -10,9 +10,9 @@ test('format rule', function() {
 
   var component = this.subject({
     template: Ember.Handlebars.compile(
-    '{{input valueBinding="MyTest.sampleModel.login"}}' +
+    '{{input valueBinding="TestContext.testModel.login"}}' +
     '{{validate-message}}' ),
-    propertyBinding: Ember.Binding.from("MyTest.sampleModel.login").to("property")
+    propertyBinding: Ember.Binding.from("TestContext.testModel.login").to("property")
   });
 
   var $component = this.append();

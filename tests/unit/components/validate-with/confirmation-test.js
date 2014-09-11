@@ -10,9 +10,9 @@ test('confirmation rule', function() {
 
   var component = this.subject({
     template: Ember.Handlebars.compile(
-    '{{input valueBinding="TestContext.testModel.password"}}' +
+    '{{input valueBinding="TestContext.testModel.passwordConfirmation"}}' +
     '{{validate-message}}' ),
-    propertyBinding: Ember.Binding.from("TestContext.testModel.password").to("property")
+    propertyBinding: Ember.Binding.from("TestContext.testModel.passwordConfirmation").to("property")
   });
 
   var $component = this.append();
@@ -20,7 +20,7 @@ test('confirmation rule', function() {
   Ember.run(function() {
 
     TestContext.testModel.set('password', '123');
-    TestContext.testModel.set('passwordConfirm', '456');
+    TestContext.testModel.set('passwordConfirmation', '456');
   });
 
   var yieldViews = component._childViews[0],
@@ -30,7 +30,7 @@ test('confirmation rule', function() {
 
  Ember.run(function() {
     TestContext.testModel.set('password', '123');
-    TestContext.testModel.set('passwordConfirm', '123');
+    TestContext.testModel.set('passwordConfirmation', '123');
  });
 
  equal(errorMessageView.get('fullMessage'), "");
