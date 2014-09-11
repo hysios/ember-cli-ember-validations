@@ -10,15 +10,10 @@ export default Ember.Component.extend({
    * a observer method on 'errors' property.
    */
   didInsertElement: function() {
-    var view = this.get('parentView');
-
-    while (view) {
-      if(ValidateWithComponent.prototype.isPrototypeOf(view)) {
-        this.set('validateWith', view);
-        view.addObserver('errors', this, this.errorsChanged);
-        return;
-      }
-      view = view.get('parentView');
+    var view = this.nearestOfType(ValidateWithComponent);
+    if(view) {
+      this.set('validateWith', view);
+      view.addObserver('errors', this, this.errorsChanged);
     }
   },
 
