@@ -23,8 +23,10 @@ var TestModel = Ember.Object.extend(Ember.Validations.Mixin, {
       presence: true
     },
     login: {
-      format:{ with: /^([a-zA-Z]|\d)+$/,
-      message: 'must be letters and numbers only'}
+      format:{
+        with: /^([a-zA-Z]|\d)+$/,
+        message: 'must be letters and numbers only'
+      }
     },
     password: {
       confirmation: {message: 'you must confirm'}
