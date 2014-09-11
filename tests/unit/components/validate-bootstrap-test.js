@@ -81,3 +81,30 @@ test('validateStatus depends on the value of isvalid', function() {
   equal(component.get('validateStatus'), 'has-error');
 });
 
+test('_concatColumnClass returns the right class name', function() {
+  var component = this.subject();
+
+  equal(component._concatColumnClass(5), 'col-md-5');
+});
+
+test('labelCol returns correct bootstrap col class', function() {
+  var component = this.subject();
+
+  equal(component.get('labelCol'), 'col-md-2');
+
+  Ember.run(function() {
+    component.set('labelCol', 4);
+  });
+  equal(component.get('labelCol'), 'col-md-4');
+});
+
+test('inputCol returns correct bootstrap col class', function() {
+  var component = this.subject();
+
+  equal(component.get('inputCol'), 'col-md-10');
+
+  Ember.run(function() {
+    component.set('inputCol', 8);
+  });
+  equal(component.get('inputCol'), 'col-md-8');
+});
