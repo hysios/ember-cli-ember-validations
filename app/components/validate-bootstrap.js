@@ -8,6 +8,10 @@ export default ValidateWithComponent.extend({
   defaultLabelCol: 2,
   defaultInputCol: 10,
 
+  /**
+   * layoutName return different layoutName depends on horizontal property
+   * @property {String}
+   */
   layoutName: function() {
     if(this.get('horizontal')) {
       return 'components/validate-bootstrap-horizontal';
@@ -19,6 +23,7 @@ export default ValidateWithComponent.extend({
   validateStatus: function(){
     var canValidate = this.get('canValidate'),
         isValid = this.get('isValid');
+
     if (!canValidate)
       return "";
 
