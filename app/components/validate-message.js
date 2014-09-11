@@ -1,33 +1,17 @@
 import Ember from 'ember';
-import ValidateWithComponent from './validate-with';
+import ValidateWithRetrieveMixin from '../mixins/validate-with-retrieve';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(ValidateWithRetrieveMixin, {
   fullMessage: null,
-  validateWith: null,
 
   /**
-   * find parent compnent view 'validate-with', then manually add
-   * a observer method on 'errors' property.
-   */
-  didInsertElement: function() {
-    var view = this.get('parentView');
-
-    while (view) {
-      if(ValidateWithComponent.prototype.isPrototypeOf(view)) {
-        this.set('validateWith', view);
-        view.addObserver('errors', this, this.errorsChanged);
-        return;
-      }
-      view = view.get('parentView');
-    }
-  },
-
-  /**
-   * observer method which triggered when errors changed in the parentView.
+   * The observing method which is triggered when the 'errors' property of the
+   * parent validation-with component changed
    */
   errorsChanged: function() {
     var errors = this.get('validateWith.errors'),
-        message = errors.join(',');
+        message = errors ? errors.join(',') : null;
+
     this.set('fullMessage', message);
-  }
+  }.observes('validateWith.errors')
 });
