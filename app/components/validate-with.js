@@ -66,8 +66,11 @@ export default Ember.Component.extend({
   model: null,
   errors: null,
   property: null,
+  isValid: null,
+  firstValid: false,
+  validCount: 0,
 
-  propertyChanged: function(){
+  propertyChanged: function() {
     var propertyBinding = this.get('propertyBinding'),
         model = this.get('model'),
         _this = this,
@@ -85,8 +88,23 @@ export default Ember.Component.extend({
 
     validateProperty(model, property).then(function(array){
       _this.set('errors', Ember.A());
+      _this.set('isValid', true);
     }, function(errors){
       _this.set('errors', errors[property]);
+      _this.set('isValid', false);
+    }).finally(function(){
+      _this.incrementProperty('validCount');
     });
-  }.observes('property')
+  }.observes('property'),
+
+  canValidate: function() {
+    var firstValid = this.get('firstValid');
+
+    if (firstValid) {
+      return true;
+    }
+
+    return this.get('validCount') > 0;
+
+  }.property('firstValid', 'validCount')
 });
