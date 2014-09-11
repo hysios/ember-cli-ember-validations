@@ -4,7 +4,7 @@ import { test, moduleForModel, moduleForComponent } from 'ember-qunit';
 moduleForComponent('validate-with', 'ValidateWithComponent', {
   // specify the other units that are required for this test
   //
-  needs: [ 'component:validate-message' ]
+  needs: [ 'component:validate-message', 'component:validate-icon' ]
 
 });
 
@@ -109,4 +109,88 @@ test('numericality rule', function() {
   //     errorMessageView = yieldViews._childViews[1];
 
   equal(errorMessageView.get('fullMessage'), "");
+});
+
+test('validate icon1', function(){
+  var component = this.subject({
+    template: Ember.Handlebars.compile(
+      '{{input valueBinding="MyTest.sampleModel.field"}}' +
+      '{{validate-icon}}'),
+    propertyBinding: Ember.Binding.from("MyTest.sampleModel.field").to("property")
+  });
+
+  var $component = this.append();
+
+  Ember.run(function() {
+    MyTest.sampleModel.set('field', '123');
+  });
+
+  var yieldViews = component._childViews[0],
+      validateIconView = yieldViews._childViews[1];
+
+  equal(validateIconView.get('iconClass'), 'glyphicon-ok');
+});
+
+test('validate icon2', function(){
+  var component = this.subject({
+    template: Ember.Handlebars.compile(
+      '{{input valueBinding="MyTest.sampleModel.field"}}' +
+      '{{validate-icon}}'),
+    propertyBinding: Ember.Binding.from("MyTest.sampleModel.field").to("property")
+  });
+
+  var $component = this.append();
+
+  Ember.run(function() {
+    MyTest.sampleModel.set('field', '');
+  });
+
+  var yieldViews = component._childViews[0],
+      validateIconView = yieldViews._childViews[1];
+
+  equal(validateIconView.get('iconClass'), 'glyphicon-remove');
+});
+
+test('validate icon3', function(){
+  var component = this.subject({
+    template: Ember.Handlebars.compile(
+      '{{input valueBinding="MyTest.sampleModel.field"}}' +
+      '{{validate-icon}}'),
+    propertyBinding: Ember.Binding.from("MyTest.sampleModel.field").to("property"),
+    firstValid: false
+  });
+
+  var $component = this.append();
+
+  Ember.run(function() {
+    MyTest.sampleModel.set('field', '');
+  });
+
+  var yieldViews = component._childViews[0],
+      validateIconView = yieldViews._childViews[1];
+
+  equal(validateIconView.get('isVisible'), false);
+});
+
+test('validate icon4', function(){
+  var component = this.subject({
+    template: Ember.Handlebars.compile(
+      '{{input valueBinding="MyTest.sampleModel.field"}}' +
+      '{{validate-icon}}'),
+    propertyBinding: Ember.Binding.from("MyTest.sampleModel.field").to("property"),
+    firstValid: false
+  });
+
+  var $component = this.append();
+
+  Ember.run(function() {
+    MyTest.sampleModel.set('field', '');
+    MyTest.sampleModel.set('field', '123');
+  });
+
+
+  var yieldViews = component._childViews[0],
+      validateIconView = yieldViews._childViews[1];
+
+  equal(validateIconView.get('isVisible'), true);
 });
