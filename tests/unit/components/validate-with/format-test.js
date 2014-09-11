@@ -19,17 +19,17 @@ test('format rule', function() {
 
   Ember.run(function() {
 
-    MyTest.sampleModel.set('login', '%guying');
+    TestContext.testModel.set('login', '%guying');
   });
 
   var yieldViews = component._childViews[0],
      errorMessageView = yieldViews._childViews[1];
 
- equal(errorMessageView.get('fullMessage'), "must be letters and numbers only");
-  
- Ember.run(function() {
-    MyTest.sampleModel.set('login', 'guying');
- });
+  equal(errorMessageView.get('fullMessage'), "must be letters and numbers only");
 
- equal(errorMessageView.get('fullMessage'), "");
+  Ember.run(function() {
+    TestContext.testModel.set('login', 'guying');
+  });
+
+  equal(errorMessageView.get('fullMessage'), "");
 });
