@@ -6,30 +6,30 @@ moduleForComponent('validate-with', 'ValidateWithComponent', {
   needs: [ 'component:validate-message' ]
 });
 
-test('length', function() {
+test('presence', function() {
   expect(2);
 
   // creates the component instance
   var component = this.subject({
     template: Ember.Handlebars.compile(
-      '{{input valueBinding="TestContext.testModel.myLength"}}' +
+      '{{input valueBinding="TestContext.testModel.myPresence"}}' +
       '{{validate-message}}' ),
-    propertyBinding: Ember.Binding.from("TestContext.testModel.myLength").to("property")
+    propertyBinding: Ember.Binding.from("TestContext.testModel.myPresence").to("property")
   });
 
   this.append();
 
   Ember.run(function() {
-    TestContext.testModel.set('myLength', '12');
+    TestContext.testModel.set('myPresence', 'hasValue');
   });
   var yieldViews = component._childViews[0],
       errorMessageView = yieldViews._childViews[1],
       msg = errorMessageView.get('fullMessage');
-  ok(msg.indexOf('is too short')>-1, 'length too short');
+  equal(msg, '', TestContext.testModel.get('myPresence') + ' is valid');
 
   Ember.run(function() {
-    TestContext.testModel.set('myLength', '12345');
+    TestContext.testModel.set('myPresence', '');
   });
   msg = errorMessageView.get('fullMessage');
-  equal(msg, '', 'length long enough');
+  equal(msg, "can't be blank", TestContext.testModel.get('myPresence') + ' is not valid');
 });

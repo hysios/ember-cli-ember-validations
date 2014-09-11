@@ -6,30 +6,30 @@ moduleForComponent('validate-with', 'ValidateWithComponent', {
   needs: [ 'component:validate-message' ]
 });
 
-test('length', function() {
+test('numericality', function() {
   expect(2);
 
   // creates the component instance
   var component = this.subject({
     template: Ember.Handlebars.compile(
-      '{{input valueBinding="TestContext.testModel.myLength"}}' +
+      '{{input valueBinding="TestContext.testModel.myNumber"}}' +
       '{{validate-message}}' ),
-    propertyBinding: Ember.Binding.from("TestContext.testModel.myLength").to("property")
+    propertyBinding: Ember.Binding.from("TestContext.testModel.myNumber").to("property")
   });
 
   this.append();
 
   Ember.run(function() {
-    TestContext.testModel.set('myLength', '12');
+    TestContext.testModel.set('myNumber', 'abc');
   });
   var yieldViews = component._childViews[0],
       errorMessageView = yieldViews._childViews[1],
       msg = errorMessageView.get('fullMessage');
-  ok(msg.indexOf('is too short')>-1, 'length too short');
+  equal(msg, 'is not a number', TestContext.testModel.get('myNumber') + ' is not valid');
 
   Ember.run(function() {
-    TestContext.testModel.set('myLength', '12345');
+    TestContext.testModel.set('myNumber', 12345);
   });
   msg = errorMessageView.get('fullMessage');
-  equal(msg, '', 'length long enough');
+  equal(msg, '', TestContext.testModel.get('myNumber') + ' is valid');
 });
