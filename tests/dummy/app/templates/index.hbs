@@ -1,28 +1,11 @@
 <div class="container">
-  <hr/>
 
-  <h3>original one without bootstrap</h3>
-  <form class="form">
-    {{#validate-with propertyBinding="user.login" class="form-group has-feedback"}}
-      <label class="control-label" for="login">
-        Login {{validate-message}}
-      </label>
-      {{input value=user.login class="form-control" id="login"}}
-      <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-    {{/validate-with}}
-  </form>
   <hr/>
-
-  <h3>original horizontal without bootstrap</h3>
-  <form class="form">
-    {{#validate-with propertyBinding="user.login"}}
-    <label class="control-label col-sm-2" for="login2">Login</label>
-    <div class="col-sm-10">
-      {{input value=user.login class="form-control" id="login2"}}
-      <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-      <span class="help-block"> {{validate-message}} </span>
-    </div>
-    {{/validate-with}}
+  <h3>Email format validation: Horizontal one with bootstrap</h3>
+  <form class="form-horizontal" role="form">
+    {{#validate-bootstrap label='Email' propertyBinding="user.email" horizontal=true labelCol=5 inputCol=5}}
+      {{input value=user.email class="form-control col-sm-9" id="email"}}
+    {{/validate-bootstrap}}
   </form>
   <hr/>
 
@@ -44,5 +27,25 @@
 
   <h3>Inline syntax</h3>
   {{input-validate propertyBinding="user.login"}}
+  <hr/>
+
+  <h3>validate select</h3>
+  <form class="form" role="form">
+    {{#validate-bootstrap label='成绩等级' propertyBinding="user.level" horizontal=true labelCol=5
+    inputCol=5}}
+      {{view Ember.Select content=options  prompt="Please select a name" class="form-control"
+      value=user.level}}
+    {{/validate-bootstrap}}
+  </form>
+  <hr/>
+
+  <h3>validate checkbox</h3>
+  <form class="form" role="form">
+    {{#validate-bootstrap  propertyBinding="user.agreement" horizontal=true labelCol=5
+    inputCol=5}}
+      {{input type='checkbox' checked=user.agreement}}是否已阅读并同意遵守本协议
+    {{/validate-bootstrap}}
+  </form>
+  <hr/>
 </div>
 
