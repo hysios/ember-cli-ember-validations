@@ -38,7 +38,7 @@ export default ValidateWithComponent.extend({
       return "";
 
     return isValid ? "has-success" : "has-error";
-  }.property('isValid', 'firstValid'),
+  }.property('isValid', 'canValidate'),
 
   labelCol: function(key, values){
     return this._concatColumnClass(arguments.length > 1 ? values : this.get('defaultLabelCol'));
