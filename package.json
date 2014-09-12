@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-ember-validations",
-  "version": "0.0.0",
+  "version": "0.0.18",
   "directories": {
     "doc": "doc",
     "test": "test"
@@ -35,12 +35,8 @@
     "ember-cli-ember-data": "0.1.0",
     "ember-cli-ic-ajax": "0.1.1",
     "ember-cli-qunit": "0.0.5",
-    "ember-ie-compatiibility-addon": "git://github.com/hysios/ember-ie-compatibility-addon.git",
+    "ember-ie-compatibility-addon": "git://github.com/hysios/ember-ie-compatibility-addon.git",
     "express": "^4.8.5",
     "glob": "^4.0.5"
-  },
-  "dependencies": {
-    "ember-ie-compatibility-addon": "git://github.com/hysios/ember-ie-compatibility-addon.git",
-    "ember-ie-compatiibility-addon": "git://github.com/hysios/ember-ie-compatibility-addon.git"
   }
 }
