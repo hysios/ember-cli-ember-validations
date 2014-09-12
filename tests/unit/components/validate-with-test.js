@@ -41,7 +41,8 @@ test('it renders', function() {
 });
 
 
-test('it input', function() {
+test('can input', function() {
+  expect(2);
 
   var component = this.subject({
     template: Ember.Handlebars.compile('{{input valueBinding="MyTest.sampleModel.field"}}'),
@@ -58,57 +59,58 @@ test('it input', function() {
   equal($component.find('input').val(), 'world');
 });
 
-test('it input clear value', function() {
+test('canValid', function() {
+  expect(2);
+
+  MyTest.sampleModel = SampleModel.create({
+    field: 'hello'
+  });
 
   var component = this.subject({
-    template: Ember.Handlebars.compile(
-      '{{input valueBinding="MyTest.sampleModel.field"}}' +
-      '{{validate-message}}' ),
+    template: Ember.Handlebars.compile('{{input valueBinding="MyTest.sampleModel.field"}}'),
     propertyBinding: Ember.Binding.from("MyTest.sampleModel.field").to("property")
   });
 
-  var $component = this.append();
+  this.append();
+
+  equal(component.get('canValidate'), false, 'canValid == false on page load');
+
+  Ember.run(function() {
+    MyTest.sampleModel.set('field', 'world');
+  });
+  equal(component.get('canValidate'), true, 'firstValid == true after at least one validate');
+});
+
+test('firstValid', function() {
+  expect(2);
+
+  var component = this.subject();
+  equal(component.get('canValidate'), false, 'firstValid==false do not validate on page loaded');
+
+  component.set('firstValid', true);
+  equal(component.get('canValidate'), true, 'firstValid==true valid on page loaded');
+});
+
+
+test('propertyChanged', function() {
+  expect(1);
+
+  MyTest.sampleModel = SampleModel.create({
+    field: 'hello'
+  });
+
+  var component = this.subject({
+    template: Ember.Handlebars.compile('{{input valueBinding="MyTest.sampleModel.field"}}'),
+    propertyBinding: Ember.Binding.from("MyTest.sampleModel.field").to("property")
+  });
+
+  this.append();
 
   Ember.run(function() {
     MyTest.sampleModel.set('field', '');
   });
 
-
-  var yieldViews = component._childViews[0],
-      errorMessageView = yieldViews._childViews[1];
-
-  equal(errorMessageView.get('fullMessage'), "can't be blank");
-
-});
-
-test('numericality rule', function() {
-
-  var component = this.subject({
-    template: Ember.Handlebars.compile(
-      '{{input valueBinding="MyTest.sampleModel.age"}}' +
-      '{{validate-message}}' ),
-    propertyBinding: Ember.Binding.from("MyTest.sampleModel.age").to("property")
-  });
-
-  var $component = this.append();
-
-  Ember.run(function() {
-    MyTest.sampleModel.set('age', 'abc');
-  });
-
-  var yieldViews = component._childViews[0],
-      errorMessageView = yieldViews._childViews[1];
-
-  equal(errorMessageView.get('fullMessage'), "is not a number");
-
-  Ember.run(function() {
-    MyTest.sampleModel.set('age', '-123.00');
-  });
-
-  // yieldViews = component._childViews[0],
-  //     errorMessageView = yieldViews._childViews[1];
-
-  equal(errorMessageView.get('fullMessage'), "");
+  equal(component.get('errors').length > 0, true, 'property change should trigger propertyChanged');
 });
 
 test('validate icon1', function(){
