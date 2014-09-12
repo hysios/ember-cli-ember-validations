@@ -59,3 +59,56 @@ test('can input', function() {
   equal($component.find('input').val(), 'world');
 });
 
+test('canValid', function() {
+  expect(2);
+
+  MyTest.sampleModel = SampleModel.create({
+    field: 'hello'
+  });
+
+  var component = this.subject({
+    template: Ember.Handlebars.compile('{{input valueBinding="MyTest.sampleModel.field"}}'),
+    propertyBinding: Ember.Binding.from("MyTest.sampleModel.field").to("property")
+  });
+
+  this.append();
+
+  equal(component.get('canValidate'), false, 'canValid == false on page load');
+
+  Ember.run(function() {
+    MyTest.sampleModel.set('field', 'world');
+  });
+  equal(component.get('canValidate'), true, 'firstValid == true after at least one validate');
+});
+
+test('firstValid', function() {
+  expect(2);
+
+  var component = this.subject();
+  equal(component.get('canValidate'), false, 'firstValid==false do not validate on page loaded');
+
+  component.set('firstValid', true);
+  equal(component.get('canValidate'), true, 'firstValid==true valid on page loaded');
+});
+
+
+test('propertyChanged', function() {
+  expect(1);
+
+  MyTest.sampleModel = SampleModel.create({
+    field: 'hello'
+  });
+
+  var component = this.subject({
+    template: Ember.Handlebars.compile('{{input valueBinding="MyTest.sampleModel.field"}}'),
+    propertyBinding: Ember.Binding.from("MyTest.sampleModel.field").to("property")
+  });
+
+  this.append();
+
+  Ember.run(function() {
+    MyTest.sampleModel.set('field', '');
+  });
+
+  equal(component.get('errors').length > 0, true, 'property change should trigger propertyChanged');
+});
