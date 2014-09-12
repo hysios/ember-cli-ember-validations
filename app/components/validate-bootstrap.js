@@ -17,13 +17,14 @@ export default ValidateWithComponent.extend({
   }.property('horizontal'),
 
   validateStatus: function(){
-    var canValidate = this.get('canValidate'),
-        isValid = this.get('isValid');
-    if (!canValidate)
+    // var canValidate = this.get('canValidate'),
+    //     isValid = this.get('isValid');
+    var isValid = this.get('isValid');
+    if (Ember.none(isValid))
       return "";
 
     return isValid ? "has-success" : "has-error";
-  }.property('isValid', 'firstValid'),
+  }.property('isValid'),
 
   labelCol: function(key, values){
     return this._concatColumnClass(arguments.length > 1 ? values : this.get('defaultLabelCol'));
