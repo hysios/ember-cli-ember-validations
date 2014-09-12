@@ -41,7 +41,8 @@ test('it renders', function() {
 });
 
 
-test('it input', function() {
+test('can input', function() {
+  expect(2);
 
   var component = this.subject({
     template: Ember.Handlebars.compile('{{input valueBinding="MyTest.sampleModel.field"}}'),
@@ -58,55 +59,3 @@ test('it input', function() {
   equal($component.find('input').val(), 'world');
 });
 
-test('it input clear value', function() {
-
-  var component = this.subject({
-    template: Ember.Handlebars.compile(
-      '{{input valueBinding="MyTest.sampleModel.field"}}' +
-      '{{validate-message}}' ),
-    propertyBinding: Ember.Binding.from("MyTest.sampleModel.field").to("property")
-  });
-
-  var $component = this.append();
-
-  Ember.run(function() {
-    MyTest.sampleModel.set('field', '');
-  });
-
-
-  var yieldViews = component._childViews[0],
-      errorMessageView = yieldViews._childViews[1];
-
-  equal(errorMessageView.get('fullMessage'), "can't be blank");
-
-});
-
-test('numericality rule', function() {
-
-  var component = this.subject({
-    template: Ember.Handlebars.compile(
-      '{{input valueBinding="MyTest.sampleModel.age"}}' +
-      '{{validate-message}}' ),
-    propertyBinding: Ember.Binding.from("MyTest.sampleModel.age").to("property")
-  });
-
-  var $component = this.append();
-
-  Ember.run(function() {
-    MyTest.sampleModel.set('age', 'abc');
-  });
-
-  var yieldViews = component._childViews[0],
-      errorMessageView = yieldViews._childViews[1];
-
-  equal(errorMessageView.get('fullMessage'), "is not a number");
-
-  Ember.run(function() {
-    MyTest.sampleModel.set('age', '-123.00');
-  });
-
-  // yieldViews = component._childViews[0],
-  //     errorMessageView = yieldViews._childViews[1];
-
-  equal(errorMessageView.get('fullMessage'), "");
-});
