@@ -1,0 +1,11 @@
+<label {{bind-attr class=":control-label labelCol" for=inputId}} >{{label}}</label>
+<div {{bind-attr class="labelOffsetCol inputCol"}}>
+  <div {{bind-attr class=inputTypeClass}} >
+    <label>
+      {{yield}}
+    </label>
+    <div {{bind-attr class="isValid:has-success:has-error"}}>
+      <span class="help-block">{{validate-message}}</span>
+    </div>
+  </div>
+</div>

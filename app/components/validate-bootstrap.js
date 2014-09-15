@@ -8,23 +8,37 @@ export default ValidateWithComponent.extend({
   defaultLabelCol: 2,
   defaultInputCol: 10,
 
+  /**
+   * layoutName return different layoutName depends on horizontal property
+   * @property {String}
+   */
   layoutName: function() {
-    if(this.get('horizontal')) {
-      return 'components/validate-bootstrap-horizontal';
-    } else {
-      return 'components/validate-bootstrap-default';
+    var isHorizontal = this.get('horizontal'),
+        templateNames = [ isHorizontal ? 'components/validate-bootstrap-horizontal' :  'components/validate-bootstrap-default'];
+
+    if (this.get('inputType')){
+      templateNames.push('input-type');
     }
+
+    return templateNames.join('-');
   }.property('horizontal'),
 
+  inputTypeClass: function(){
+    var inputTypes = ['checkbox', 'radio'],
+        type = this.get('inputType');
+
+    return inputTypes.indexOf(type) > -1 ? type : '';
+  }.property(),
+
   validateStatus: function(){
-    // var canValidate = this.get('canValidate'),
-    //     isValid = this.get('isValid');
-    var isValid = this.get('isValid');
-    if (Ember.none(isValid))
+    var canValidate = this.get('canValidate'),
+        isValid = this.get('isValid');
+
+    if (!canValidate)
       return "";
 
     return isValid ? "has-success" : "has-error";
-  }.property('isValid'),
+  }.property('isValid', 'canValidate'),
 
   labelCol: function(key, values){
     return this._concatColumnClass(arguments.length > 1 ? values : this.get('defaultLabelCol'));
@@ -34,6 +48,12 @@ export default ValidateWithComponent.extend({
     return this._concatColumnClass(arguments.length > 1 ? values : this.get('defaultInputCol'));
   }.property(),
 
+  labelOffsetCol: function(key, values){
+    return this._concatColumnClass(
+      arguments.length > 1 ? values : this.get('defaultLabelCol'),
+      true);
+  }.property(),
+
   /**
    * [_concatColumnClass description]
    *
@@ -41,9 +61,16 @@ export default ValidateWithComponent.extend({
    * @param  {[type]} col [description]
    * @return {[type]}     [description]
    */
-  _concatColumnClass: function(col){
-    var mode = this.getWithDefault('columnMode', 'md'),
-        str = ['col', mode, col];
+  _concatColumnClass: function(col, offset){
+
+    var mode, str, offset;
+
+    if (typeof offset === 'undefined') {
+      offset = false;
+    }
+
+    mode = this.getWithDefault('columnMode', 'md');
+    str = ['col', mode, offset ? 'offset-' + col : col];
     return str.join('-');
   }
 });

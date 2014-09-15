@@ -67,8 +67,10 @@ export default Ember.Component.extend({
   errors: null,
   property: null,
   isValid: null,
+  // if true, validate on page load even no user input.
   firstValid: false,
   validCount: 0,
+  disableIcon: false,
 
   propertyChanged: function() {
     var propertyBinding = this.get('propertyBinding'),
@@ -97,6 +99,9 @@ export default Ember.Component.extend({
     });
   }.observes('property'),
 
+  /**
+   * determine if the target can validate
+   */
   canValidate: function() {
     var firstValid = this.get('firstValid');
 

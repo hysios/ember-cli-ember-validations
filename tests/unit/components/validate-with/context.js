@@ -5,6 +5,9 @@ var TestModel = Ember.Object.extend(Ember.Validations.Mixin, {
   myUrl: null,
   myNumber: null,
   myPresence: null,
+  login: null,
+  password: null,
+  passwordConfirmation: null,
 
   validations: {
     myLength: {
@@ -18,6 +21,15 @@ var TestModel = Ember.Object.extend(Ember.Validations.Mixin, {
     },
     myPresence: {
       presence: true
+    },
+    login: {
+      format:{
+        with: /^([a-zA-Z]|\d)+$/,
+        message: 'must be letters and numbers only'
+      }
+    },
+    password: {
+      confirmation: {message: 'you must confirm'}
     }
   }
 });
