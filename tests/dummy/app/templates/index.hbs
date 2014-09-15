@@ -76,16 +76,18 @@
   <hr/>
 
   <h3>validate vertical checkbox group</h3>
-  <form class="form-horizontal" role="form">
+  <form class="form" role="form">
     {{#validate-bootstrap label="至少选择一项爱好" propertyBinding="user.occupation" disableIcon=true}}
-      {{view 'radio' name="occupation" selectionBinding="user.occupation" value="0" id="radio1"}}
-      <label for="radio1">教师</label>
-      {{view 'radio' name="occupation" selectionBinding="user.occupation" value="1" id="radio2"}}
-      <label for="radio2">公务员</label>
-      {{view 'radio' name="occupation" selectionBinding="user.occupation" value="2" id="radio3"}}
-      <label for="radio3">医生</label>
-      {{view 'radio' name="occupation" selectionBinding="user.occupation" value="3" id="radio4"}}
-      <label for="radio4">企/事业单位员工</label>
+      <div class="form-group">
+        {{view 'radio' name="occupation" selectionBinding="user.occupation" value="0" id="radio1"}}
+        <label for="radio1">教师</label>
+        {{view 'radio' name="occupation" selectionBinding="user.occupation" value="1" id="radio2"}}
+        <label for="radio2">公务员</label>
+        {{view 'radio' name="occupation" selectionBinding="user.occupation" value="2" id="radio3"}}
+        <label for="radio3">医生</label>
+        {{view 'radio' name="occupation" selectionBinding="user.occupation" value="3" id="radio4"}}
+        <label for="radio4">企/事业单位员工</label>
+      </div>
     {{/validate-bootstrap}}
   </form>
   <hr/>
