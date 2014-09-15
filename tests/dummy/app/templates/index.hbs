@@ -1,70 +1,42 @@
 <div class="container">
 
-  <hr/>
-  <h3>Email format validation: Horizontal one with bootstrap</h3>
+  <h3>Horizontal layout</h3>
   <form class="form-horizontal" role="form">
-    {{#validate-bootstrap label='Email' propertyBinding="user.email" horizontal=true labelCol=5 inputCol=5}}
-      {{input value=user.email class="form-control col-sm-9" id="email"}}
-    {{/validate-bootstrap}}
-  </form>
-  <hr/>
-
-  <h3>Horizontal one with bootstrap</h3>
-  <form class="form-horizontal" role="form">
-    {{#validate-bootstrap label='Login' propertyBinding="user.login" horizontal=true labelCol=5 inputCol=5}}
+    {{#validate-bootstrap label='登录' propertyBinding="user.login" horizontal=true}}
       {{input value=user.login class="form-control col-sm-9" id="login3"}}
     {{/validate-bootstrap}}
+    {{#validate-bootstrap label='邮件' propertyBinding="user.email" horizontal=true}}
+      {{input value=user.email class="form-control col-sm-9" id="email"}}
+    {{/validate-bootstrap}}
+    {{#validate-bootstrap propertyBinding="user.agreement" inputType="checkbox" horizontal=true}}
+      {{input type='checkbox' checked=user.agreement}}是否已阅读并同意遵守本协议
+    {{/validate-bootstrap}}
   </form>
   <hr/>
 
-  <h3>Vertical one with bootstrap</h3>
+  <h3>Vertical layout</h3>
   <form class="form" role="form">
-    {{#validate-bootstrap label='登陆' propertyBinding="user.login"}}
+    {{#validate-bootstrap label='登录' propertyBinding="user.login"}}
       {{input value=user.login class="form-control" id="login4"}}
+    {{/validate-bootstrap}}
+    {{#validate-bootstrap label='成绩等级' propertyBinding="user.level" disableIcon=true}}
+      {{view Ember.Select content=options  prompt="请选择..." class="form-control"
+      value=user.level}}
+    {{/validate-bootstrap}}
+    {{#validate-bootstrap label="密码" propertyBinding="user.password"}}
+      {{input type='password' value=user.password class="form-control"}}
+    {{/validate-bootstrap}}
+    {{#validate-bootstrap label="确认密码" propertyBinding="user.passwordConfirmation"}}
+      {{input type='password' value=user.passwordConfirmation class="form-control"}}
+    {{/validate-bootstrap}}
+    {{#validate-bootstrap propertyBinding="user.agreement" inputType="checkbox"}}
+      {{input type='checkbox' checked=user.agreement}}是否已阅读并同意遵守本协议
     {{/validate-bootstrap}}
   </form>
   <hr/>
 
   <h3>Inline syntax</h3>
-  {{input-validate propertyBinding="user.login"}}
-  <hr/>
-
-  <h3>validate select</h3>
-  <form class="form" role="form">
-    {{#validate-bootstrap label='成绩等级' propertyBinding="user.level" disableIcon=true}}
-      {{view Ember.Select content=options  prompt="Please select a name" class="form-control"
-      value=user.level}}
-    {{/validate-bootstrap}}
-  </form>
-  <hr/>
-
-  <h3>validate vertical password</h3>
-  <form class="form" role="form">
-    {{#validate-bootstrap label='password' propertyBinding="user.password"}}
-      {{input type='password' value=user.password class="form-control"}}
-    {{/validate-bootstrap}}
-  </form>
-  <form class="form" role="form">
-    {{#validate-bootstrap label="passwordConfirmation" propertyBinding="user.passwordConfirmation"}}
-      {{input type='password' value=user.passwordConfirmation class="form-control"}}
-    {{/validate-bootstrap}}
-  </form>
-  <hr/>
-
-  <h3>validate vertical checkbox</h3>
-  <form class="form" role="form">
-    {{#validate-bootstrap label="agreement" propertyBinding="user.agreement" inputType="checkbox"}}
-      {{input type='checkbox' checked=user.agreement}}是否已阅读并同意遵守本协议
-    {{/validate-bootstrap}}
-  </form>
-  <hr/>
-
-  <h3>validate horizontal checkbox</h3>
-  <form class="form-horizontal" role="form">
-    {{#validate-bootstrap  propertyBinding="user.agreement" inputType="checkbox" horizontal=true}}
-      {{input type='checkbox' checked=user.agreement}}是否已阅读并同意遵守本协议
-    {{/validate-bootstrap}}
-  </form>
-  <hr/>
+  {{input-validate propertyBinding="user.login" label='登录' horizontal=true}}
+  {{input-validate propertyBinding="user.email" label='邮件' horizontal=true}}
 </div>
 
