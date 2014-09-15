@@ -4,6 +4,8 @@ import DS from 'ember-data';
 export default DS.Model.extend(Ember.Validations.Mixin, {
   login: DS.attr('string'),
   email: DS.attr('string'),
+  password: DS.attr('string'),
+  passwordConfirmation: DS.attr('string'),
   level: DS.attr('string'),
   agreement: DS.attr('boolean'),
   hobbies: DS.attr('string'),
@@ -14,6 +16,12 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
       presence: true,
       length: { minimum: 5 },
       numericality: true
+    },
+
+    password: {
+      presence: true,
+      length: { minimum: 6 },
+      confirmation: { message: "password should be the same!"}
     },
 
     email: {
