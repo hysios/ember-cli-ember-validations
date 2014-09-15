@@ -37,5 +37,8 @@
     "ember-cli-qunit": "0.0.5",
     "express": "^4.8.5",
     "glob": "^4.0.5"
+  },
+  "dependencies": {
+    "ember-ie-compatibility-addon": "git://github.com/hysios/ember-ie-compatibility-addon.git"
   }
 }
