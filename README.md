@@ -8,6 +8,11 @@ This README outlines the details of collaborating on this Ember addon.
 * `npm install`
 * `bower install`
 
+since ember-validations bower package do not have a dist folder, we need create it ourself.
+
+*  cd bower_components/ember-validations/
+*  bundle install && bundle exec rake dist
+
 ## Running
 
 * `ember server`
