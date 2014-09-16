@@ -36,7 +36,9 @@
   <hr/>
 
   <h3>Inline syntax</h3>
-  {{input-validate propertyBinding="user.login" label='登录' horizontal=true}}
-  {{input-validate propertyBinding="user.email" label='邮件' horizontal=true}}
+  <form class="form-horizontal" role="form">
+    {{input-validate propertyBinding="user.login" label='登录' horizontal=true}}
+    {{input-validate propertyBinding="user.email" label='邮件' horizontal=true}}
+  </form>
 </div>
 
