@@ -3,7 +3,7 @@
 var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 var app = new EmberAddon();
-
+app.import('bower_components/respond/dest/respond.min.js');
 // Use `app.import` to add additional libraries to the generated
 // output files.
 //

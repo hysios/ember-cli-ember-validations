@@ -20,7 +20,7 @@
       {{input value=user.login class="form-control" id="login4"}}
     {{/validate-bootstrap}}
     {{#validate-bootstrap label='成绩等级' propertyBinding="user.level" disableIcon=true}}
-      {{view Ember.Select content=options  prompt="请选择..." class="form-control"
+      {{view Ember.Select content=options  prompt="请选择..." class="form-control custom"
       value=user.level}}
     {{/validate-bootstrap}}
     {{#validate-bootstrap label="密码" propertyBinding="user.password"}}
