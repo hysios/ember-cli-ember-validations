@@ -8,6 +8,8 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
   passwordConfirmation: DS.attr('string'),
   level: DS.attr('string'),
   agreement: DS.attr('boolean'),
+  hobbies: DS.attr('string'),
+  occupation: DS.attr('string'),
 
   validations: {
     login: {
@@ -32,7 +34,17 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
     },
     agreement: {
       acceptance: true
+    },
+    hobbies: {
+      presence: {
+        message: '至少选择一个爱好'
+      }
+    },
+    occupation: {
+      inclusion: {
+        'in': ['0', '1'],
+        message: '职业必须是教师或公务员'
+      }
     }
   }
-
 });

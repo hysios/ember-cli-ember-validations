@@ -4,7 +4,7 @@
     <label>
       {{yield}}
     </label>
-    <div {{bind-attr class="isValid:has-success:has-error"}}>
+    <div {{bind-attr class=validateStatus}}>
       <span class="help-block">{{validate-message}}</span>
     </div>
   </div>
